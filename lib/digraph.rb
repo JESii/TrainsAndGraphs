@@ -11,6 +11,14 @@ class Digraph
     return new_node
   end
 
+  def add_edge(from, to, distance)
+    true
+  end
+
+  def get_distance(from, to)
+    5
+  end
+
 end
 
 class Dignode < Struct.new (:vname)
