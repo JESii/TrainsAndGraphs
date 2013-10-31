@@ -32,5 +32,8 @@ describe "Digraph" do
     expect(dg.ecount).to eq 2
     expect(dg[1].name).to eq 'A'
     expect(dg[2].name).to eq 'B'
+    expect(dg.add_edge('A','D',7)).to eq true
+    expect(dg.vcount).to eq 4
+    expect(dg.ecount).to eq 3
   end
 end
