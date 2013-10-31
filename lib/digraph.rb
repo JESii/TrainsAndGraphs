@@ -21,11 +21,11 @@ class Digraph
 
 end
 
-class Dignode < Struct.new (:vname)
-  attr_reader :vname
+class Dignode < Struct.new (:name)
+  attr_reader :name
 
-  def initialize(vname)
-    @vname = vname
+  def initialize(name)
+    @name = name
   end
 
 end

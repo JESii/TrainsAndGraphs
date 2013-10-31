@@ -11,7 +11,7 @@ describe "Digraph" do
     dg = Digraph.new
     dn = dg.add_vertex('A')
     expect(dn).to be_a Dignode
-    expect(dn.vname).to eq 'A'
+    expect(dn.name).to eq 'A'
     expect(dg.vcount).to eq 1
   end
   it "adds a new edge" do
