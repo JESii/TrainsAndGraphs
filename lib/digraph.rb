@@ -13,9 +13,17 @@ class Digraph
   end
 
   def add_edge(from, to, distance)
-    self.add_vertex(from) if find_vertex(from) == false
-    self.add_vertex(to) if find_vertex(to) == false
-    @ecount += 1
+    if find_vertex(from) == false
+      self.add_vertex(from) 
+      @ecount += 1
+      pp @digraph
+    end
+    if find_vertex(to) == false
+      self.add_vertex(to)
+      dn = find_vertex(from)
+      dn.add_adj_vertex(to, distance)
+      @ecount += 1
+    end
     true
   end
 

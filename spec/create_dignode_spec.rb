@@ -15,4 +15,8 @@ describe "Dignode" do
     dn.add_adj_vertex('B',14)
     expect(dn.distance('B')).to eq 14
   end
+  it "doesn't add a nil adjancency [bug]" do
+    dn = Dignode.new('A','B',13)
+    expect{ dn.distance(nil) }.to raise_error(KeyError)
+  end
 end
