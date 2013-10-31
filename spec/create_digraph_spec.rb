@@ -18,6 +18,6 @@ describe "Digraph" do
     dg = Digraph.new
     dn = dg.add_vertex('A')
     expect(dg.add_edge('A','B',5)).to be_true
-    expect(dg.get_distance('A','B')).to eq 5
+    expect(dg.distance('A','B')).to eq 5
   end
 end

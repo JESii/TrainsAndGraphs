@@ -15,7 +15,7 @@ class Digraph
     true
   end
 
-  def get_distance(from, to)
+  def distance(from, to)
     5
   end
 
