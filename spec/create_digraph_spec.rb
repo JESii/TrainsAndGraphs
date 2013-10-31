@@ -39,14 +39,14 @@ describe "Digraph" do
     end
   end
   describe "Access to distance data between two nodes" do
-     xit "returns distance between two immediately adjacent nodes" do
+     it "returns distance between two immediately adjacent nodes" do
         dg = Digraph.new
         dg.add_edge('A','B',5)
         dna = dg.find_vertex('A')
         expect(dna.distance('B')).to eq 5
         expect(dg.distance('A','B')).to eq 5
      end
-     xit "returns correct distance for 2nd edge" do
+     it "returns correct distance for 2nd edge" do
        dg = Digraph.new
        dg.add_edge('A','B',5)
        dg.add_edge('B','C',7)

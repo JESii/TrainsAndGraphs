@@ -16,7 +16,6 @@ class Digraph
     if find_vertex(from) == false
       self.add_vertex(from) 
       @ecount += 1
-      pp @digraph
     end
     if find_vertex(to) == false
       self.add_vertex(to)
@@ -29,8 +28,7 @@ class Digraph
 
   def distance(from, to)
     dn = find_vertex(from)
-    pp dn
-    dn.find_edge(to).distance
+    dn.distance(to)
   end
 
   def [] index
@@ -39,7 +37,6 @@ class Digraph
 
   def find_vertex(name)
     @digraph.each do |v|
-      pp v
       return v if v.name == name
     end
     false
