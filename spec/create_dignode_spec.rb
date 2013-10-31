@@ -19,4 +19,10 @@ describe "Dignode" do
     dn = Dignode.new('A','B',13)
     expect{ dn.distance(nil) }.to raise_error(KeyError)
   end
+  it "finds the edge distance for specified edge" do
+    dn = Dignode.new('a','b',12)
+    dn.add_adj_vertex('c',15)
+    dn.add_adj_vertex('d',9)
+    expect(dn.distance('d')).to eq 9
+  end
 end

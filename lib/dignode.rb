@@ -10,10 +10,6 @@ class Dignode < Struct.new(:name, :adj)
     self.adj.fetch(to)
   end
 
-  def find_edge(to)
-    return self.distance if to == self.name
-  end
-
   def add_adj_vertex(vertex, distance)
     self.adj[vertex] = distance unless vertex == nil
   end
