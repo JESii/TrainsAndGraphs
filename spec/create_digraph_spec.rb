@@ -1,6 +1,21 @@
 require '../spec_helper'
 require 'digraph'
 
+describe "Dignode" do
+  it "creates a new Dignode" do
+    dn = Dignode.new('A')
+    expect(dn.name).to eq 'A'
+  end
+  it "adds an adjacent vertex" do
+    dn = Dignode.new('A','B',4)
+    expect(dn.distance('B')).to eq 4
+  end
+  it "adds an edge to existing node" do
+    dn = Dignode.new('A')
+    dn.add_adj_vertex('B',14)
+    expect(dn.distance('B')).to eq 14
+  end
+end
 describe "Digraph" do
   context "Basic vertex/edge creation" do
     it "creates a new Digraph" do
@@ -36,5 +51,20 @@ describe "Digraph" do
       expect(dg.vcount).to eq 4
       expect(dg.ecount).to eq 3
     end
+  end
+  describe "Access to distance data between two nodes" do
+     xit "returns distance between two immediately adjacent nodes" do
+        dg = Digraph.new
+        dg.add_edge('A','B',5)
+        dna = dg.find_vertex('A')
+        expect(dna.distance('B')).to eq 5
+        expect(dg.distance('A','B')).to eq 5
+     end
+     xit "returns correct distance for 2nd edge" do
+       dg = Digraph.new
+       dg.add_edge('A','B',5)
+       dg.add_edge('B','C',7)
+       expect(dg.distance('B','C')).to eq 7
+     end
   end
 end

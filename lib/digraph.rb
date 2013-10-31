@@ -20,7 +20,9 @@ class Digraph
   end
 
   def distance(from, to)
-    5
+    dn = find_vertex(from)
+    pp dn
+    dn.find_edge(to).distance
   end
 
   def [] index
@@ -29,6 +31,7 @@ class Digraph
 
   def find_vertex(name)
     @digraph.each do |v|
+      pp v
       return v if v.name == name
     end
     false
@@ -36,11 +39,26 @@ class Digraph
 
 end
 
-class Dignode < Struct.new (:name)
-  attr_reader :name
+class Dignode < Struct.new(:name, :adj)
 
-  def initialize(name)
-    @name = name
+  def initialize(name, adj_vertex=nil, distance=0)
+    self.name = name
+    self.adj = {}
+    add_adj_vertex(adj_vertex, distance)
+    pp "Dignode#initialize: #{self.name}, #{self.adj}"
+  end
+
+  def distance(to)
+    self.adj[to]
+  end
+
+  def find_edge(to)
+    return self.distance if to == self.name
+  end
+
+  def add_adj_vertex(vertex, distance)
+    self.adj[vertex] = distance
+    pp "add_adj_vertex: #{@name}, #{@adj}, #{self.inspect}"
   end
 
 end
