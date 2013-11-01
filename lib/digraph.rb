@@ -53,7 +53,22 @@ class Digraph
     end
   end
 
+  def route_distance(route)
+    route_list = parse_route(route)
+    route_list = {'A' => 'B'}
+    route_distance = 0
+    route_list.each_pair do |key, val|
+      tmp = self.distance(key, val)
+      return -1 if tmp == -1
+      route_distance += tmp
+    end
+    route_distance
+  end
+
 private
+
+  def parse_route(route)
+  end
 
   def parse_line(line)
     from = line[0]
