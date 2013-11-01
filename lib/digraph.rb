@@ -1,3 +1,5 @@
+require 'dignode'
+
 class Digraph
   attr_reader :vcount, :ecount
   def initialize
@@ -42,5 +44,21 @@ class Digraph
     false
   end
 
-end
+  def read_graph(infile)
+    File.open(infile) do |file|
+      file.each_line do |line|
+        (from, to, distance) = parse_line(line)
+        self.add_edge(from, to, distance)
+      end
+    end
+  end
 
+private
+
+  def parse_line(line)
+    from = line[0]
+    to = line[1]
+    distance = line[2..line.size-1]
+    [from, to, distance.to_i]
+  end
+end
