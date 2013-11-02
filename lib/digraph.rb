@@ -71,7 +71,6 @@ private
     for i in 0..route.size-2
       route_list[route[i]] = route[i+1]
     end
-    pp route_list
     route_list
   end
 

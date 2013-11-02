@@ -13,4 +13,10 @@ describe "Search Digraph" do
     dg.add_edge('B','C',7)
     expect(dg.route_distance('ABC')).to eq 12
   end
+  it "returns 'not found' if route doesn't exist" do
+    dg = Digraph.new
+    dg.add_edge('A','B',5)
+    dg.add_edge('B','C',7)
+    expect(dg.route_distance('ACB')).to eq -1
+  end
 end
