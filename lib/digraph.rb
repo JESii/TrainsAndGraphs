@@ -84,12 +84,10 @@ class Digraph
       this_node = route[route.size-1]
       next_route_list = get_route_list(this_node)
       next if next_route_list.empty?
-      pp next_route_list
-      pp next_route_list[0]
-      pp next_route_list[0][1]
+      next_route = next_route_list[0]
       next_distance = next_route_list[0][1]
       next_node = next_route_list[0][0].last
-      pp "#{this_node}, #{next_route_list}, #{next_node}, #{next_distance}"
+      #pp "#{this_node}, #{next_route_list}, #{next_node}, #{next_distance}"
       routes << [route[0..route.size-1]+next_node,distance+next_route_list[0][1]]
       pp "routes: #{routes}"
     end
