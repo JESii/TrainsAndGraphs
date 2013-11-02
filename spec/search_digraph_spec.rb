@@ -2,6 +2,12 @@ require '../spec_helper.rb'
 require 'digraph'
 
 describe "Search Digraph" do
+  describe "String" do
+    it "provides access to last character of string" do
+      expect('abc'.last).to eq 'c'
+      expect('a'.last).to eq 'a'
+    end
+  end
   describe "create simple graphs" do
     it "creates a 3-edge graph" do
       dg = Digraph.new()
@@ -42,7 +48,6 @@ describe "Search Digraph" do
       dg.add_edge('a','b',3)
       dg.add_edge('a','c',2)
       dg.add_edge('b','c',4)
-      pp dg
       expect(dg.get_routes_from('a',2)).to eq [['ab', 3],['ac', 2],['abc', 7]]
     end
   end

@@ -1,5 +1,11 @@
 require 'dignode'
 
+class String
+  def last
+    self[self.size-1]
+  end
+end
+
 class Digraph
   attr_reader :vcount, :ecount
   def initialize
@@ -72,10 +78,14 @@ class Digraph
 
   def get_routes_from(start,depth)
     routes = get_route_list(start)
+    pp "get_routes_from(#{start}): #{routes}"
     routes.each do |route, distance|
-      next_node = route[route.size-1]
-      pp next_node
-      pp get_route_list(next_node)
+      this_node = route[route.size-1]
+      next_route_list = get_route_list(this_node)
+      next_distance = next_route_list[0][1]
+      next_node = next_route_list[0][0].last
+      pp "#{this_node}, #{next_route_list}, #{next_node}, #{next_distance}"
+      routes << [route[0..route.size-2]+this_node,distance+next_route_list[0][1]]
     end
   end
 
