@@ -19,4 +19,12 @@ class Dignode < Struct.new(:name, :adj)
     self.adj
   end
 
+  def get_route_list
+    result = []
+    name = self.name
+    self.adj.each_pair do |key,val|
+      result << [name+key,val]
+    end
+    result
+  end
 end

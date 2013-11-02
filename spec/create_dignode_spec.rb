@@ -32,4 +32,9 @@ describe "Dignode" do
     dn.add_adj_vertex('c',15)
     expect(dn.get_adj_list).to eq Hash('b' => 12, 'c' => 15)
   end
+  it "returns the route list for a given node" do
+    dn = Dignode.new('a','b',12)
+    dn.add_adj_vertex('c',15)
+    expect(dn.get_route_list).to eq Array[['ab',12],['ac',15]]
+  end
 end
