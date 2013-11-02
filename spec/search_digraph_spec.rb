@@ -44,7 +44,7 @@ describe "Search Digraph" do
       dg.add_edge('A','C',2)
       expect(dg.get_route_list('A')).to eq [['AB', 3], ['AC', 2]]
     end
-    xit "finds 2-stop routes" do
+    it "finds 2-stop routes" do
       dg = Digraph.new
       dg.add_edge('a','b',3)
       dg.add_edge('a','c',2)
