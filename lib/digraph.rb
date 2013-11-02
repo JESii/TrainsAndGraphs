@@ -64,6 +64,12 @@ class Digraph
     route_distance
   end
 
+  def get_routes_from(start)
+    dn = find_vertex(start)
+    return -1 if dn == -1
+    dn.get_route_list
+  end
+
 private
 
   def parse_route(route)
