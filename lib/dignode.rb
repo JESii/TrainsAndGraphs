@@ -1,6 +1,6 @@
 class Dignode < Struct.new(:name, :adj)
 
-  def initialize(name, adj_vertex='', distance=-1)
+  def initialize(name, adj_vertex=nil, distance=-1)
     self.name = name
     self.adj = {}
     add_adj_vertex(adj_vertex, distance)

@@ -15,10 +15,11 @@ describe "Dignode" do
     dn.add_adj_vertex('B',14)
     expect(dn.distance('B')).to eq 14
   end
-  # TODO: Find a clean way to test this condition
-  xit "doesn't add a nil adjancency [bug]" do
-    dn = Dignode.new('A','B',13)
-    expect{ dn.distance('') }.to raise_error(KeyError)
+  it "doesn't add a nil adjancency [bug]" do
+    dn = Dignode.new('A')
+    dn.add_adj_vertex('C',7)
+    expect(dn.get_adj_list).to_not include('')
+    #expect{ dn.distance('') }.to raise_error(KeyError)
   end
   it "finds the edge distance for specified edge" do
     dn = Dignode.new('a','b',12)
