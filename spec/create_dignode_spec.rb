@@ -26,9 +26,9 @@ describe "Dignode" do
     dn.add_adj_vertex('d',9)
     expect(dn.distance('d')).to eq 9
   end
-  it "returns the node list for a given node" do
+  it "returns the adj list for a given node" do
     dn = Dignode.new('a','b',12)
     dn.add_adj_vertex('c',15)
-    expect(dn.get_node_list).to eq Hash('b' => 12, 'c' => 15)
+    expect(dn.get_adj_list).to eq Hash('b' => 12, 'c' => 15)
   end
 end
