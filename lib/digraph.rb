@@ -21,10 +21,10 @@ class Digraph
     end
     if find_vertex(to) == false
       self.add_vertex(to)
-      dn = find_vertex(from)
-      dn.add_adj_vertex(to, distance)
       @ecount += 1
     end
+    dn = find_vertex(from)
+    dn.add_adj_vertex(to, distance)
     true
   end
 
@@ -64,13 +64,22 @@ class Digraph
     route_distance
   end
 
-  def get_routes_from(start)
+  def get_route_list(start)
     dn = find_vertex(start)
     return -1 if dn == -1
     dn.get_route_list
   end
 
-private
+  def get_routes_from(start,depth)
+    routes = get_route_list(start)
+    routes.each do |route, distance|
+      next_node = route[route.size-1]
+      pp next_node
+      pp get_route_list(next_node)
+    end
+  end
+
+  private
 
   def parse_route(route)
     route_list = {}

@@ -2,6 +2,15 @@ require '../spec_helper.rb'
 require 'digraph'
 
 describe "Search Digraph" do
+  describe "create simple graphs" do
+    it "creates a 3-edge graph" do
+      dg = Digraph.new()
+      dg.add_edge('a','b',3)
+      dg.add_edge('a','c',2)
+      dg.add_edge('b','c',4)
+      expect(dg.route_distance('abc')).to eq 7
+    end
+  end
   describe "#route_distance" do
     it "returns a one-edge distance" do
       dg = Digraph.new
@@ -26,7 +35,15 @@ describe "Search Digraph" do
       dg = Digraph.new
       dg.add_edge('A','B',3)
       dg.add_edge('A','C',2)
-      expect(dg.get_routes_from('A')).to eq [['AB', 3], ['AC', 2]]
+      expect(dg.get_route_list('A')).to eq [['AB', 3], ['AC', 2]]
+    end
+    xit "finds 2-stop routes" do
+      dg = Digraph.new
+      dg.add_edge('a','b',3)
+      dg.add_edge('a','c',2)
+      dg.add_edge('b','c',4)
+      pp dg
+      expect(dg.get_routes_from('a',2)).to eq [['ab', 3],['ac', 2],['abc', 7]]
     end
   end
 end

@@ -3,7 +3,7 @@ class Dignode < Struct.new(:name, :adj)
   def initialize(name, adj_vertex=nil, distance=-1)
     self.name = name
     self.adj = {}
-    add_adj_vertex(adj_vertex, distance)
+    add_adj_vertex(adj_vertex, distance) unless adj_vertex == nil
   end
 
   def distance(to)
@@ -12,7 +12,7 @@ class Dignode < Struct.new(:name, :adj)
   end
 
   def add_adj_vertex(vertex, distance)
-    self.adj[vertex] = distance unless vertex == nil
+    self.adj[vertex] = distance
   end
 
   def get_adj_list
