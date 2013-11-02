@@ -15,4 +15,8 @@ class Dignode < Struct.new(:name, :adj)
     self.adj[vertex] = distance unless vertex == nil
   end
 
+  def get_node_list
+    self.adj
+  end
+
 end
