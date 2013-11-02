@@ -6,6 +6,7 @@ describe "Search Digraph" do
     it "provides access to last character of string" do
       expect('abc'.last).to eq 'c'
       expect('a'.last).to eq 'a'
+      expect(''.last).to eq ''
     end
   end
   describe "create simple graphs" do

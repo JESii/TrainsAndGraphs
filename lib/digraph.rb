@@ -2,6 +2,7 @@ require 'dignode'
 
 class String
   def last
+    return '' if self.size == 0
     self[self.size-1]
   end
 end
