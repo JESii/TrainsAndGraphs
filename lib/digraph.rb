@@ -2,7 +2,7 @@ require 'dignode'
 
 # TODO: Refactor names - using 'route' for different things
 #       See path_distance() which says a route is 'ABC'
-#       See parse_route() which converts 'ABC' to a hash of 1-edge weighted routes
+#       See parse_path() which converts 'ABC' to a hash of 1-edge weighted routes
 #       get_routes_from() returns route_list (Array)
 #           containing weighted routes (Array[route, distance])
 # Essentially difference between 'route' and 'weighted_route'?
@@ -70,7 +70,7 @@ class Digraph
   end
 
   def path_distance(path)
-    route_list = parse_route(path)
+    route_list = parse_path(path)
     path_distance = 0
     route_list.each_pair do |key, val|
       tmp = self.distance(key, val)
@@ -108,10 +108,10 @@ class Digraph
     [route[0..route.size-1]+next_name, distance+next_distance]
   end
 
-  def parse_route(route)
+  def parse_path(path)
     route_list = {}
-    for i in 0..route.size-2
-      route_list[route[i]] = route[i+1]
+    for i in 0..path.size-2
+      route_list[path[i]] = path[i+1]
     end
     route_list
   end
