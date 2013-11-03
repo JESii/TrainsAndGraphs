@@ -15,26 +15,26 @@ describe "Search Digraph" do
       dg.add_edge('a','b',3)
       dg.add_edge('a','c',2)
       dg.add_edge('b','c',4)
-      expect(dg.route_distance('abc')).to eq 7
+      expect(dg.path_distance('abc')).to eq 7
     end
   end
-  describe "#route_distance" do
+  describe "#path_distance" do
     it "returns a one-edge distance" do
       dg = Digraph.new
       dg.add_edge('A','B',5)
-      expect(dg.route_distance('AB')).to eq 5
+      expect(dg.path_distance('AB')).to eq 5
     end
     it "returns a two-edge distance" do
       dg = Digraph.new
       dg.add_edge('A','B',5)
       dg.add_edge('B','C',7)
-      expect(dg.route_distance('ABC')).to eq 12
+      expect(dg.path_distance('ABC')).to eq 12
     end
     it "returns 'not found' if route doesn't exist" do
       dg = Digraph.new
       dg.add_edge('A','B',5)
       dg.add_edge('B','C',7)
-      expect(dg.route_distance('ACB')).to eq -1
+      expect(dg.path_distance('ACB')).to eq -1
     end
   end
   describe "#find_routes_by_stops" do
