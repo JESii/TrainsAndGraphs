@@ -70,9 +70,9 @@ class Digraph
   end
 
   def path_distance(path)
-    route_list = parse_path(path)
+    path_list = parse_path(path)
     path_distance = 0
-    route_list.each_pair do |key, val|
+    path_list.each_pair do |key, val|
       tmp = self.distance(key, val)
       return -1 if tmp == -1
       path_distance += tmp
@@ -109,11 +109,12 @@ class Digraph
   end
 
   def parse_path(path)
-    route_list = {}
+    path_list = {}
     for i in 0..path.size-2
-      route_list[path[i]] = path[i+1]
+      path_list[path[i]] = path[i+1]
     end
-    route_list
+    pp "parse_path: #{path_list}"
+    path_list
   end
 
   def parse_line(line)
