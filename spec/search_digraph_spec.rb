@@ -38,6 +38,11 @@ describe "Search Digraph" do
     end
   end
   describe "#find_routes_by_stops" do
+    it "handles an empty route" do
+      dg = Digraph.new
+      dg.add_edge('a','b',3)
+      expect(dg.get_route_list('c')).to eq []
+    end
     it "finds all 1-stop routes" do
       dg = Digraph.new
       dg.add_edge('A','B',3)
@@ -49,7 +54,8 @@ describe "Search Digraph" do
       dg.add_edge('a','b',3)
       dg.add_edge('a','c',2)
       dg.add_edge('b','c',4)
-      expect(dg.get_routes_from('a',2)).to eq [['ab', 3],['ac', 2],['abc', 7]]
+      #expect(dg.get_routes_from('a',2)).to eq [['ab', 3],['ac', 2],['abc', 7]]
+      expect(dg.get_routes_from('a',2)).to eq [Route.new('ab', 3),Route.new('ac', 2),Route.new('abc', 7)]
     end
     xit "finds 3-stop routes" do
       dg = Digraph.new

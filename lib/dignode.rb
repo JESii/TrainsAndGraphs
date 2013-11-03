@@ -1,3 +1,5 @@
+require 'route'
+
 class Dignode < Struct.new(:name, :adj)
 
   def initialize(name, adj_vertex=nil, distance=-1)

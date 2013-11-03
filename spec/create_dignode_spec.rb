@@ -1,6 +1,5 @@
 require '../spec_helper'
 require 'dignode'
-require 'route'
 
 describe "Dignode" do
   it "creates a new Dignode" do

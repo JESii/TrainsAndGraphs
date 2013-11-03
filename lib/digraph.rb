@@ -53,6 +53,7 @@ class Digraph
   end
 
   def find_vertex(name)
+    pp "find_vertex: #{@digraph}"
     @digraph.each do |v|
       return v if v.name == name
     end
@@ -81,11 +82,13 @@ class Digraph
 
   def get_route_list(start)
     dn = find_vertex(start)
-    return -1 if dn == -1
+    return [] if dn == false
+    pp "get_route_list: #{dn.get_route_list}"
     dn.get_route_list
   end
 
-  def get_routes_from(start,depth)
+  def get_routes_from(start, depth)
+    pp "get_routes_from: #{start}, #{depth}"
     routes = get_route_list(start)
     pp "get_routes_from(#{start}): #{routes}"
     routes.each do |route|
