@@ -88,12 +88,16 @@ class Digraph
       next_distance = next_route_list[0][1]
       next_node = next_route_list[0][0].last
       #pp "#{this_node}, #{next_route_list}, #{next_node}, #{next_distance}"
-      routes << [route[0..route.size-1]+next_node,distance+next_route_list[0][1]]
+      routes << get_one_route_from(route, distance, next_node, next_distance)
       pp "routes: #{routes}"
     end
   end
 
   private
+
+  def get_one_route_from(route, distance, next_name, next_distance)
+    [route[0..route.size-1]+next_name, distance+next_distance]
+  end
 
   def parse_route(route)
     route_list = {}
