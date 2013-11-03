@@ -1,5 +1,6 @@
 require '../spec_helper'
 require 'dignode'
+require 'route'
 
 describe "Dignode" do
   it "creates a new Dignode" do
@@ -35,6 +36,7 @@ describe "Dignode" do
   it "returns the route list for a given node" do
     dn = Dignode.new('a','b',12)
     dn.add_adj_vertex('c',15)
-    expect(dn.get_route_list).to eq Array[['ab',12],['ac',15]]
+    #expect(dn.get_route_list).to eq Array[['ab',12],['ac',15]]
+    expect(dn.get_route_list).to eq Array[Route.new('ab',12),Route.new('ac',15)]
   end
 end

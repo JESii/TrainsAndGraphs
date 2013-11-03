@@ -23,7 +23,7 @@ class Dignode < Struct.new(:name, :adj)
     result = []
     name = self.name
     self.adj.each_pair do |key,val|
-      result << [name+key,val]
+      result << Route.new(name+key,val)
     end
     result
   end

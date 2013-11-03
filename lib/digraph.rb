@@ -1,11 +1,9 @@
 require 'dignode'
 
 # TODO: Refactor names - using 'route' for different things
-#       See path_distance() which says a route is 'ABC'
-#       See parse_path() which converts 'ABC' to a hash of 1-edge weighted routes
 #       get_routes_from() returns route_list (Array)
 #           containing weighted routes (Array[route, distance])
-# Essentially difference between 'route' and 'weighted_route'?
+#       S/b Array[path, distance]    
 # 1. 'Path' = character sequence showing nodes visited
 # 2. 'Route' = [path, distance]
 
@@ -25,6 +23,7 @@ class Digraph
   end
 
   def add_vertex(vname)
+    pp "digraph: #{@digraph}"
     new_node = @digraph[@vcount] = Dignode.new(vname) 
     @vcount += 1
     return new_node
@@ -89,23 +88,26 @@ class Digraph
   def get_routes_from(start,depth)
     routes = get_route_list(start)
     pp "get_routes_from(#{start}): #{routes}"
-    routes.each do |route, distance|
-      this_node = route[route.size-1]
+    routes.each do |route|
+      pp "get_routes_from using route: #{route}"
+    end
+    routes.each do |path, distance|
+      this_node = path[path.size-1]
       next_route_list = get_route_list(this_node)
       next if next_route_list.empty?
       next_route = next_route_list[0]
       next_distance = next_route_list[0][1]
       next_node = next_route_list[0][0].last
       #pp "#{this_node}, #{next_route_list}, #{next_node}, #{next_distance}"
-      routes << get_one_route_from(route, distance, next_node, next_distance)
+      routes << get_one_route_from(path, distance, next_node, next_distance)
       pp "routes: #{routes}"
     end
   end
 
   private
 
-  def get_one_route_from(route, distance, next_name, next_distance)
-    [route[0..route.size-1]+next_name, distance+next_distance]
+  def get_one_route_from(path, distance, next_node, next_distance)
+    [path[0..path.size-1]+next_node, distance+next_distance]
   end
 
   def parse_path(path)
