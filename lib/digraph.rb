@@ -23,7 +23,6 @@ class Digraph
   end
 
   def add_vertex(vname)
-    pp "digraph: #{@digraph}"
     new_node = @digraph[@vcount] = Dignode.new(vname) 
     @vcount += 1
     return new_node
@@ -53,7 +52,6 @@ class Digraph
   end
 
   def find_vertex(name)
-    pp "find_vertex: #{@digraph}"
     @digraph.each do |v|
       return v if v.name == name
     end
@@ -83,34 +81,28 @@ class Digraph
   def get_route_list(start)
     dn = find_vertex(start)
     return [] if dn == false
-    pp "get_route_list: #{dn.get_route_list}"
     dn.get_route_list
   end
 
   def get_routes_from(start, depth)
-    pp "get_routes_from: #{start}, #{depth}"
     routes = get_route_list(start)
-    pp "get_routes_from(#{start}): #{routes}"
     routes.each do |route|
       pp "get_routes_from using route: #{route}"
-    end
-    routes.each do |path, distance|
-      this_node = path[path.size-1]
+      this_node = route.path.last
       next_route_list = get_route_list(this_node)
       next if next_route_list.empty?
       next_route = next_route_list[0]
-      next_distance = next_route_list[0][1]
-      next_node = next_route_list[0][0].last
-      #pp "#{this_node}, #{next_route_list}, #{next_node}, #{next_distance}"
-      routes << get_one_route_from(path, distance, next_node, next_distance)
+      next_distance = next_route.distance
+      next_node = next_route.path.last
+      routes << get_one_route_from(route, next_node, next_distance)
       pp "routes: #{routes}"
     end
   end
 
   private
 
-  def get_one_route_from(path, distance, next_node, next_distance)
-    [path[0..path.size-1]+next_node, distance+next_distance]
+  def get_one_route_from(route, next_node, next_distance)
+    Route.new(route.path[0..route.path.size-1]+next_node, route.distance+next_distance)
   end
 
   def parse_path(path)
@@ -118,7 +110,6 @@ class Digraph
     for i in 0..path.size-2
       path_list[path[i]] = path[i+1]
     end
-    pp "parse_path: #{path_list}"
     path_list
   end
 
