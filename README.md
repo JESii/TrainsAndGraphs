@@ -3,6 +3,10 @@
 ##Background
 * I use the Thoughbot convention of avoiding begin blocks in specs; that way, the conditions are clearly obvious at each example.
 
+##Terminology
+* 'Path' = character sequence showing nodes visited; e.g., 'ABC'
+* 'Route' = an array containing a path and its cumulative distance; e.g., ['ABC', 7]
+
 ##Notes/Design Decisions
 * Decided to use an adjacency list as opposed to adjacency matrix: Approach works well for smaller digraphs Adjacency matrix would work best with separate matrix library
 * When creating an edge, automatically create the vertices, as may be needed.

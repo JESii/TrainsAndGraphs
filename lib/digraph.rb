@@ -1,5 +1,14 @@
 require 'dignode'
 
+# TODO: Refactor names - using 'route' for different things
+#       See route_distance() which says a route is 'ABC'
+#       See parse_route() which converts 'ABC' to a hash of 1-edge weighted routes
+#       get_routes_from() returns route_list (Array)
+#           containing weighted routes (Array[route, distance])
+# Essentially difference between 'route' and 'weighted_route'?
+# 1. 'Path' = character sequence showing nodes visited
+# 2. 'Route' = [path, distance]
+
 class String
   def last
     return '' if self.size == 0
