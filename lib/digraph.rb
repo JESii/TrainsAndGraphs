@@ -29,6 +29,7 @@ class Digraph
   end
 
   def add_edge(from, to, distance)
+    # TODO: Consider returning the the node instead of 'true'
     if find_vertex(from) == false
       self.add_vertex(from) 
       @ecount += 1
@@ -94,15 +95,16 @@ class Digraph
       next_route = next_route_list[0]
       next_distance = next_route.distance
       next_node = next_route.path.last
-      routes << get_one_route_from(route, next_node, next_distance)
+      routes << get_one_route_from(route, next_route)
       pp "routes: #{routes}"
     end
   end
 
   private
 
-  def get_one_route_from(route, next_node, next_distance)
-    Route.new(route.path[0..route.path.size-1]+next_node, route.distance+next_distance)
+  def get_one_route_from(route, next_route)
+    raise 'UnMatched Routes' if route.path.last != next_route.path[0] && next_route.path.size != 2
+    Route.new(route.path[0..route.path.size-1] + next_route.path.last, route.distance + next_route.distance)
   end
 
   def parse_path(path)
