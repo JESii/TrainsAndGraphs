@@ -86,18 +86,25 @@ class Digraph
   end
 
   def get_routes_from(start, depth)
-    routes = get_route_list(start)
-    routes.each do |route|
-      pp "get_routes_from using route: #{route}"
-      this_node = route.path.last
-      next_route_list = get_route_list(this_node)
-      next if next_route_list.empty?
-      next_route = next_route_list[0]
-      next_distance = next_route.distance
-      next_node = next_route.path.last
-      routes << get_one_route_from(route, next_route)
-      pp "routes: #{routes}"
+    routes = []
+    next_route_list = [Route.new(start, 0)]
+    (0..depth).each do |level|
+      next_route_list = get_routes_from_route_list(next_route_list)
+      routes << next_route_list
     end
+    routes.flatten
+  end
+  def get_routes_from_route_list(route_list)
+    result = []
+    route_list.each do |route|
+      this_node = route.path.last
+      this_route_list = get_route_list(this_node)
+      next if this_route_list.empty?
+      this_route_list.each do |next_route|
+        result << get_one_route_from(route, next_route)
+      end
+    end
+    result
   end
 
   private
