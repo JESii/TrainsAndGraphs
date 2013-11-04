@@ -53,4 +53,19 @@ describe "Digraph" do
        expect(dg.distance('B','C')).to eq 7
      end
   end
+  context "utility functions" do
+    it "#node_list with 2 nodes" do
+      dg = Digraph.new
+      dg.add_edge('a','b',5)
+      dg.node_list.should =~ ['a','b']
+    end
+    it "#node_list with 5 nodes" do
+      dg = Digraph.new
+      dg.add_edge('a','b',5)
+      dg.add_edge('a','c',3)
+      dg.add_edge('c','d',4)
+      dg.add_edge('d','e',7)
+      dg.node_list.should =~ ['a','b','c','d','e']
+    end
+  end
 end

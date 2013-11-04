@@ -90,4 +90,17 @@ describe "Search Digraph" do
       dg.get_routes_from('a',2).should =~ [Route.new('ab',3),Route.new('abc',7)]
     end
   end
+  describe "finds routes by Dijkstra's algorithm" do
+    xit "2-nodes" do
+      dg = Digraph.new
+      dg.add_edge('a','b',3)
+      expect(dg.dijkstra(dg,'a','b')).to eq 3
+    end
+    xit "3-nodes" do
+      dg = Digraph.new
+      dg.add_edge('a','b',3)
+      dg.add_edge('a','c',2)
+      expect(dg.dijkstra(dg,'a','b')).to eq 2
+    end
+  end
 end

@@ -1,9 +1,6 @@
 require 'dignode'
 
-# TODO: Refactor names - using 'route' for different things
-#       get_routes_from() returns route_list (Array)
-#           containing weighted routes (Array[route, distance])
-#       S/b Array[path, distance]    
+# Definitions:
 # 1. 'Path' = character sequence showing nodes visited
 # 2. 'Route' = [path, distance]
 
@@ -41,6 +38,10 @@ class Digraph
     dn = find_vertex(from)
     dn.add_adj_vertex(to, distance)
     true
+  end
+
+  def node_list
+    @digraph.map { |v| v.name }
   end
 
   def distance(from, to)
@@ -111,6 +112,11 @@ class Digraph
       result << get_one_route_from(route, next_route)
     end
     result.flatten
+  end
+
+  def dijkstra(graph, from, to)
+    node_list = graph.node_list
+    0
   end
 
   private
