@@ -67,5 +67,11 @@ describe "Digraph" do
       dg.add_edge('d','e',7)
       dg.node_list.should =~ ['a','b','c','d','e']
     end
+    it "#[] with node name" do
+      dg = Digraph.new
+      dg.add_edge('a','b',5)
+      expect(dg[1]).to eq dg['a']
+      expect(dg[2]).to eq dg['b']
+    end
   end
 end

@@ -91,7 +91,7 @@ describe "Search Digraph" do
     end
   end
   describe "finds routes by Dijkstra's algorithm" do
-    xit "2-nodes" do
+    it "2-nodes" do
       dg = Digraph.new
       dg.add_edge('a','b',3)
       expect(dg.dijkstra(dg,'a','b')).to eq 3

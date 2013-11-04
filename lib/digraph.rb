@@ -50,7 +50,8 @@ class Digraph
   end
 
   def [] index
-    @digraph[index-1]
+    return @digraph[index-1] if index.to_i > 0
+    @digraph[find_vertex_index(index)]
   end
 
   def find_vertex(name)
@@ -60,6 +61,12 @@ class Digraph
     false
   end
 
+  def find_vertex_index(name)
+    @digraph.each_with_index do |v,index|
+      return index if v.name == name
+    end
+    false
+  end
   def read_graph(infile)
     File.open(infile) do |file|
       file.each_line do |line|
@@ -115,8 +122,25 @@ class Digraph
   end
 
   def dijkstra(graph, from, to)
-    node_list = graph.node_list
-    0
+    @dj_intree = @dj_distance = @dj_parent = {}
+    dijkstra_initialize(graph.node_list)
+    @dj_distance[from] = 0
+    v = from
+    pp "dijkstra: #{v}"
+    while @dj_intree[v] == false do
+      @dj_intree[v] = true
+      p = graph[v].route_list
+      pp p
+    end
+    3
+  end
+
+  def dijkstra_initialize(node_list)
+    node_list.each do |node|
+      @dj_intree[node] = false
+      @dj_distance[node] = 9E99
+      @dj_parent[node] = -1
+    end
   end
 
   private
