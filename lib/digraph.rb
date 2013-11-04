@@ -88,7 +88,7 @@ class Digraph
   def get_routes_from(start, depth)
     routes = []
     next_route_list = [Route.new(start, 0)]
-    (0..depth).each do |level|
+    (1..depth).each do |level|
       next_route_list = get_routes_from_route_list(next_route_list)
       routes << next_route_list
     end

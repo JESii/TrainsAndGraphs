@@ -1,5 +1,9 @@
 #README
 
+##Running the programs
+  trains
+It uses a file name of 'sample.dat'
+
 ##Background
 * I use the Thoughbot convention of avoiding begin blocks in specs; that way, the conditions are clearly obvious at each example.
 

@@ -1,0 +1,53 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift File.dirname(__FILE__)
+$LOAD_PATH.unshift './lib'
+
+require 'digraph'
+require 'trainsutil'
+
+include TrainsUtil
+
+@dg = Digraph.new()
+@dg.read_graph('sample.dat')
+
+puts "Trains challenge for ThoughtWorks\n\n"
+
+# Questions 1-5: route (path) distance
+puts print_route_distance('ABC')
+puts print_route_distance('AD')
+puts print_route_distance('ADC')
+puts print_route_distance('AEBCD')
+puts print_route_distance('AED')
+puts
+
+# Question 6: trips from C to C
+routes = @dg.get_routes_from('C',3)
+results = []
+routes.each do |route|
+  results << route.path if route.path.last == 'C'
+end
+puts <<EOF
+The number of trips starting at C and ending at C with a maximum of 3 stops includes:
+#{results}
+EOF
+puts
+
+# Question 7: trips from A to C
+routes = @dg.get_routes_from('A',4)
+results = []
+routes.each do |route|
+  next if route.path.last != 'C'
+  next if route.path.size != 5
+  results << route.path
+end
+puts <<EOF
+The number of trips starting at A and ending at C with exactly 4 stops includes:
+#{results}
+EOF
+puts
+
+# Question 8: shortest route from A to C
+
+# Question 9: shortest route from B to B
+
+# Question 10: different routes from C to C with distance < 30
