@@ -93,27 +93,27 @@ class Digraph
     dn.get_route_list
   end
 
-  def get_routes_from(start, depth)
+  def get_routes_by_stops(start, depth)
     routes = []
     next_route_list = [Route.new(start, 0)]
     (1..depth).each do |level|
-      next_route_list = get_routes_from_route_list(next_route_list)
+      next_route_list = get_routes_by_stops_route_list(next_route_list)
       routes << next_route_list
     end
     routes.flatten
   end
 
-  def get_routes_from_route_list(route_list)
+  def get_routes_by_stops_route_list(route_list)
     result = []
     route_list.each do |route|
       this_route_list = get_route_list(route.path.last)
       next if this_route_list.empty?
-      result << get_routes_from_node_list(route,this_route_list)
+      result << get_routes_by_stops_node_list(route,this_route_list)
     end
     result.flatten
   end
 
-  def get_routes_from_node_list(route,route_list)
+  def get_routes_by_stops_node_list(route,route_list)
     result = []
     route_list.each do |next_route|
       result << get_one_route_from(route, next_route)

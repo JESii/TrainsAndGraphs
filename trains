@@ -26,7 +26,7 @@ puts print_route_distance('AED')
 puts
 
 # Question 6: trips from C to C
-routes = @dg.get_routes_from('C',3)
+routes = @dg.get_routes_by_stops('C',3)
 results = []
 routes.each do |route|
   results << route.path if route.path.last == 'C'
@@ -38,7 +38,7 @@ EOF
 puts
 
 # Question 7: trips from A to C
-routes = @dg.get_routes_from('A',4)
+routes = @dg.get_routes_by_stops('A',4)
 results = []
 routes.each do |route|
   next if route.path.last != 'C'
