@@ -94,17 +94,23 @@ class Digraph
     end
     routes.flatten
   end
+
   def get_routes_from_route_list(route_list)
     result = []
     route_list.each do |route|
-      this_node = route.path.last
-      this_route_list = get_route_list(this_node)
+      this_route_list = get_route_list(route.path.last)
       next if this_route_list.empty?
-      this_route_list.each do |next_route|
-        result << get_one_route_from(route, next_route)
-      end
+      result << get_routes_from_node_list(route,this_route_list)
     end
-    result
+    result.flatten
+  end
+
+  def get_routes_from_node_list(route,route_list)
+    result = []
+    route_list.each do |next_route|
+      result << get_one_route_from(route, next_route)
+    end
+    result.flatten
   end
 
   private
