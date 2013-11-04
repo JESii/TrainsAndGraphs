@@ -94,7 +94,7 @@ describe "Search Digraph" do
     it "2-nodes" do
       dg = Digraph.new
       dg.add_edge('a','b',3)
-      shortest_paths = dg.dijkstra('a')
+      shortest_paths = dg.__send__(:dijkstra,'a')
       expect(shortest_paths['b']).to eq 3
     end
     it "3-nodes" do
@@ -102,7 +102,7 @@ describe "Search Digraph" do
       dg.add_edge('a','b',3)
       dg.add_edge('a','c',5)
       dg.add_edge('b','c',1)
-      shortest_paths = dg.dijkstra('a')
+      shortest_paths = dg.__send__(:dijkstra,'a')
       expect(shortest_paths['c']).to eq 4
     end
     it "returns shortest path between two nodex" do
@@ -118,14 +118,14 @@ describe "Search Digraph" do
       dg = Digraph.new
       dg.add_edge('a','b',3)
       dg.add_edge('b','a',1)
-      expect(dg.shortest_cycle('a')).to eq 4
+      expect(dg.__send__(:shortest_cycle,'a')).to eq 4
     end
     it "4-node cycle" do
       dg = Digraph.new
       dg.add_edge('a','b',3)
       dg.add_edge('b','c',1)
       dg.add_edge('c','a',1)
-      expect(dg.shortest_cycle('a')).to eq 5
+      expect(dg.__send__(:shortest_cycle,'a')).to eq 5
     end
     it "4-node cycle in shortest_path" do
       dg = Digraph.new

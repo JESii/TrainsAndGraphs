@@ -65,12 +65,6 @@ class Digraph
     false
   end
 
-  def find_vertex_index(name)
-    @digraph.each_with_index do |v,index|
-      return index if v.name == name
-    end
-    false
-  end
   def read_graph(infile)
     File.open(infile) do |file|
       file.each_line do |line|
@@ -107,24 +101,6 @@ class Digraph
     routes.flatten
   end
 
-  def get_routes_by_stops_route_list(route_list)
-    result = []
-    route_list.each do |route|
-      this_route_list = get_route_list(route.path.last)
-      next if this_route_list.empty?
-      result << get_routes_by_stops_node_list(route,this_route_list)
-    end
-    result.flatten
-  end
-
-  def get_routes_by_stops_node_list(route,route_list)
-    result = []
-    route_list.each do |next_route|
-      result << get_one_route_from(route, next_route)
-    end
-    result.flatten
-  end
-
   def get_routes_by_distance(from, to, distance)
     # TODO: Determine if there IS a path from->to and how many stops it takes
     #       Otherwise, could loop forever if no path
@@ -145,6 +121,38 @@ class Digraph
     routes = select_routes_by_endpoints(from, to, routes)
     routes.flatten!
     routes
+  end
+
+  def shortest_path(from, to)
+    return dijkstra(from)[to] if from != to
+    shortest_cycle(from)
+  end
+
+   private
+
+  def get_routes_by_stops_route_list(route_list)
+    result = []
+    route_list.each do |route|
+      this_route_list = get_route_list(route.path.last)
+      next if this_route_list.empty?
+      result << get_routes_by_stops_node_list(route,this_route_list)
+    end
+    result.flatten
+  end
+
+  def get_routes_by_stops_node_list(route,route_list)
+    result = []
+    route_list.each do |next_route|
+      result << get_one_route_from(route, next_route)
+    end
+    result.flatten
+  end
+
+  def find_vertex_index(name)
+    @digraph.each_with_index do |v,index|
+      return index if v.name == name
+    end
+    false
   end
 
   def select_routes_by_distance(from, to, distance, route_list)
@@ -193,17 +201,12 @@ class Digraph
     @dj_distance
   end
 
-  def shortest_path(from, to)
-    return self.dijkstra(from)[to] if from != to
-    self.shortest_cycle(from)
-  end
-
   def shortest_cycle(from)
     out_routes = self[from].get_route_list
     distance = MAXINT
     out_routes.each do |route|
       out_node = route.path.last
-      shortest_paths = self.dijkstra(out_node)
+      shortest_paths = dijkstra(out_node)
       if distance > shortest_paths[from] + route.distance
         distance = shortest_paths[from] + route.distance
       end
