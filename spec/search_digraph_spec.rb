@@ -90,17 +90,29 @@ describe "Search Digraph" do
       dg.get_routes_from('a',2).should =~ [Route.new('ab',3),Route.new('abc',7)]
     end
   end
-  describe "finds routes by Dijkstra's algorithm" do
+  describe "Dijkstra's algorithm" do
     it "2-nodes" do
       dg = Digraph.new
       dg.add_edge('a','b',3)
-      expect(dg.dijkstra(dg,'a','b')).to eq 3
+      shortest_paths = dg.dijkstra('a')
+      expect(shortest_paths['b']).to eq 3
     end
-    xit "3-nodes" do
+    it "3-nodes" do
       dg = Digraph.new
       dg.add_edge('a','b',3)
-      dg.add_edge('a','c',2)
-      expect(dg.dijkstra(dg,'a','b')).to eq 2
+      dg.add_edge('a','c',5)
+      dg.add_edge('b','c',1)
+      shortest_paths = dg.dijkstra('a')
+      expect(shortest_paths['c']).to eq 4
+    end
+    it "returns shortest path between two nodex" do
+      dg = Digraph.new
+      dg.add_edge('a','b',3)
+      dg.add_edge('a','c',5)
+      dg.add_edge('b','c',1)
+      dg.add_edge('b','d',4)
+      dg.add_edge('c','d',2)
+      expect(dg.shortest_path('a','d')).to eq 6
     end
   end
 end

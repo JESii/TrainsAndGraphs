@@ -121,29 +121,51 @@ class Digraph
     result.flatten
   end
 
-  def dijkstra(graph, from, to)
-    @dj_intree = @dj_distance = @dj_parent = {}
-    dijkstra_initialize(graph.node_list)
+  MAXINT = 999999999
+  def dijkstra(from)
+    dj_initialize(self.node_list)
+    #@dj_parent << from
     @dj_distance[from] = 0
     v = from
-    pp "dijkstra: #{v}"
     while @dj_intree[v] == false do
       @dj_intree[v] = true
-      p = graph[v].route_list
-      pp p
+      p = self[v].get_route_list
+      while ! p.empty? do
+        this_route = p.pop
+        w = this_route.path.last
+        weight = this_route.distance
+        if @dj_distance[w] > (@dj_distance[v] + weight)
+          @dj_distance[w] = @dj_distance[v] + weight
+          @dj_parent << w
+        end
+      end
+      v = 1
+      dist = MAXINT
+      self.node_list.each do |i|
+        if (@dj_intree[i] == false) && (dist > @dj_distance[i])
+          dist = @dj_distance[i]
+          v = i
+        end
+      end
     end
-    3
+    @dj_distance
   end
 
-  def dijkstra_initialize(node_list)
-    node_list.each do |node|
-      @dj_intree[node] = false
-      @dj_distance[node] = 9E99
-      @dj_parent[node] = -1
-    end
+  def shortest_path(from, to)
+    self.dijkstra(from)[to]
   end
 
   private
+
+  def dj_initialize(node_list)
+    @dj_intree = {}
+    @dj_distance = {}
+    @dj_parent = []
+    node_list.each do |node|
+      @dj_intree[node] = false
+      @dj_distance[node] = MAXINT
+    end
+  end
 
   def get_one_route_from(route, next_route)
     raise 'UnMatched Routes' if route.path.last != next_route.path[0] && next_route.path.size != 2
