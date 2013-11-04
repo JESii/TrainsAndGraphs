@@ -8,6 +8,11 @@ require 'trainsutil'
 include TrainsUtil
 
 @dg = Digraph.new()
+if ARGV[0].nil?
+  puts "Usage:"
+  puts "\ttrains <input-file>"
+  exit 1
+end
 @dg.read_graph(ARGV[0])
 
 puts "Trains challenge for ThoughtWorks\n\n"
