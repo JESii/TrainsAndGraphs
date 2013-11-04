@@ -114,5 +114,25 @@ describe "Search Digraph" do
       dg.add_edge('c','d',2)
       expect(dg.shortest_path('a','d')).to eq 6
     end
+    it "3-node cycle" do
+      dg = Digraph.new
+      dg.add_edge('a','b',3)
+      dg.add_edge('b','a',1)
+      expect(dg.shortest_cycle('a')).to eq 4
+    end
+    it "4-node cycle" do
+      dg = Digraph.new
+      dg.add_edge('a','b',3)
+      dg.add_edge('b','c',1)
+      dg.add_edge('c','a',1)
+      expect(dg.shortest_cycle('a')).to eq 5
+    end
+    it "4-node cycle in shortest_path" do
+      dg = Digraph.new
+      dg.add_edge('a','b',3)
+      dg.add_edge('b','c',1)
+      dg.add_edge('c','a',1)
+      expect(dg.shortest_path('a','a')).to eq 5
+    end
   end
 end

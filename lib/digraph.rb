@@ -152,7 +152,21 @@ class Digraph
   end
 
   def shortest_path(from, to)
-    self.dijkstra(from)[to]
+    return self.dijkstra(from)[to] if from != to
+    self.shortest_cycle(from)
+  end
+
+  def shortest_cycle(from)
+    out_routes = self[from].get_route_list
+    distance = MAXINT
+    out_routes.each do |route|
+      out_node = route.path.last
+      shortest_paths = self.dijkstra(out_node)
+      if distance > shortest_paths[from] + route.distance
+        distance = shortest_paths[from] + route.distance
+      end
+    end
+    distance
   end
 
   private

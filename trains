@@ -47,7 +47,9 @@ EOF
 puts
 
 # Question 8: shortest route from A to C
+puts "The shortest route from A to C is: #{@dg.shortest_path('A','C')}"
 
 # Question 9: shortest route from B to B
+puts "The shortest route from B to B is: #{@dg.shortest_path('B','B')}"
 
 # Question 10: different routes from C to C with distance < 30
