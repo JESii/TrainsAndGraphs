@@ -9,6 +9,10 @@ class String
     return '' if self.size == 0
     self[self.size-1]
   end
+  def first
+    return '' if self.size == 0
+    self[0]
+  end
 end
 
 class Digraph
@@ -119,6 +123,44 @@ class Digraph
       result << get_one_route_from(route, next_route)
     end
     result.flatten
+  end
+
+  def get_routes_by_distance(from, to, distance)
+    # TODO: Determine if there IS a path from->to and how many stops it takes
+    #       Otherwise, could loop forever if no path
+    routes = []
+    next_route_list = [Route.new(from, 0)]
+    max_iterations = 50
+    iterations = 0
+    more_paths = true
+    while more_paths do
+      iterations += 1
+      next_route_list = get_routes_by_stops_route_list(next_route_list)
+      next_route_list = select_routes_by_distance(from, to, distance, next_route_list)
+      break if next_route_list.empty?
+      routes << next_route_list.flatten
+      more_paths = false if iterations >= max_iterations
+    end
+    routes.flatten!
+    routes = select_routes_by_endpoints(from, to, routes)
+    routes.flatten!
+    routes
+  end
+
+  def select_routes_by_distance(from, to, distance, route_list)
+    result = []
+    route_list.each do |route|
+     result << route unless route.distance > distance
+    end
+    result
+  end
+
+  def select_routes_by_endpoints(from, to, route_list)
+    result = []
+    route_list.each do |route|
+      result << route if (route.path.first == from && route.path.last == to)
+    end
+    result
   end
 
   MAXINT = 999999999

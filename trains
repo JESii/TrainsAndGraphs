@@ -58,3 +58,9 @@ puts "The shortest route from A to C is: #{@dg.shortest_path('A','C')}"
 puts "The shortest route from B to B is: #{@dg.shortest_path('B','B')}"
 
 # Question 10: different routes from C to C with distance < 30
+routes = @dg.get_routes_by_distance('C','C',29)
+puts <<EOF
+The number of routes from C to C with distance < 30 is: #{routes.size}
+and those routes are:
+#{routes.map { |r| r.path} }
+EOF

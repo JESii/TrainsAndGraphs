@@ -135,4 +135,32 @@ describe "Search Digraph" do
       expect(dg.shortest_path('a','a')).to eq 5
     end
   end
+  describe "finds paths by distance" do
+    it "2-node" do
+      dg = Digraph.new
+      dg.add_edge('a','b',3)
+      dg.add_edge('a','c',1)
+      dg.add_edge('b','c',2)
+      expect(dg.get_routes_by_distance('a','c',5).size).to eq 2
+    end
+    it "4-node" do
+      dg = Digraph.new
+      dg.add_edge('a','b',3)
+      dg.add_edge('a','c',1)
+      dg.add_edge('b','c',2)
+      dg.add_edge('b','d',2)
+      dg.add_edge('d','c',2)
+      expect(dg.get_routes_by_distance('a','c',7).size).to eq 3
+    end
+    it "4-node and cycle" do
+      dg = Digraph.new
+      dg.add_edge('a','b',3)
+      dg.add_edge('a','c',1)
+      dg.add_edge('b','c',2)
+      dg.add_edge('b','d',2)
+      dg.add_edge('d','c',2)
+      dg.add_edge('c','a',2)
+      expect(dg.get_routes_by_distance('a','c',7).size).to eq 5
+    end
+  end
 end
