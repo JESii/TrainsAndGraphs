@@ -8,7 +8,7 @@ require 'trainsutil'
 include TrainsUtil
 
 @dg = Digraph.new()
-@dg.read_graph('sample.dat')
+@dg.read_graph(ARGV[0])
 
 puts "Trains challenge for ThoughtWorks\n\n"
 
