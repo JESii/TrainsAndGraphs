@@ -1,4 +1,4 @@
-require '../spec_helper'
+require 'spec_helper'
 require 'digraph'
 
 describe 'Digraph input' do
