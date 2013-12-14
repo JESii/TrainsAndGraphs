@@ -92,13 +92,11 @@ class Digraph
   end
 
   def get_routes_by_stops(start, depth)
-    routes = []
     next_route_list = [Route.new(start, 0)]
-    (1..depth).each do |level|
+    (1..depth).map do |level|
       next_route_list = get_routes_by_stops_route_list(next_route_list)
-      routes << next_route_list
-    end
-    routes.flatten
+      next_route_list
+    end.flatten
   end
 
   def get_routes_by_distance(from, to, distance)
@@ -126,6 +124,14 @@ class Digraph
   def shortest_path(from, to)
     return dijkstra(from)[to] if from != to
     shortest_cycle(from)
+  end
+
+  def shortest_path(from, to)
+    if from != to
+      dijkstra(from)[to]
+    else
+      shortest_cycle(from)
+    end
   end
 
    private
