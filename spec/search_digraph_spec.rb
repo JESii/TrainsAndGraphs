@@ -1,6 +1,7 @@
 require 'spec_helper.rb'
 require 'digraph'
 
+puts '=================SearchDiGraph Specs==============='
 describe "Search Digraph" do
   describe "String" do
     it "provides access to last character of string" do
