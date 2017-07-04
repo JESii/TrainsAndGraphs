@@ -1,11 +1,11 @@
-#README
+# README
 
-##Background / Terminology
+## Background / Terminology
 * I use the Thoughbot convention of avoiding begin blocks in specs; that way, the conditions are clearly obvious at each example, even though it's not so DRY. Depending on a site's particular coding guidelines, these might need to be refactored with begin blocks and additional context definitions.
 * 'Path' = character sequence showing nodes visited; e.g., 'ABC'
 * 'Route' = a Route object containing a path and its cumulative distance; e.g., &lt;'ABC', 7>. Occasionally, a degenerate route of the form &lt;'A',0> is used to initiate processing.
 
-##Notes/Design Decisions
+##N otes/Design Decisions
 * Decided to use an adjacency list as opposed to adjacency matrix: Approach works well for smaller digraphs Adjacency matrix would work best with separate matrix library and for larger, dense graphs. The adjacency lists are used only in Dignode; when passing data to an external user, Dignode creates a route list of the form: [&lt;'AB', 3>, &lt;'AC',4>,...]
 * When creating an edge, any required vertices are created as needed.
 * Access to Dignode is always through Digraph; no 'external' use so that Dignode is effectively 'hidden' from eeryone by Digraph 
@@ -13,13 +13,13 @@
 * Spec'ing this out led me to a solution that didn't include the classic DFS or BFS implementation. Instead, I wound up implementing an algorithm to directly handle the case of routes with n stops (get&#95;routes&#95;by&#95;stops) and that naturally led to a similar approach for the distance problem (get&#95;routes&#95;by&#95;distance). Were I to consider further work, I might well refactor this to use the more common approach.
 * The Dijkstra algorithm to find all shortest paths between two nodes was implemented based on material in the book "The Algorithm Design Manual" using the standard approach. That method has not been refactored, but has been left in the canonical form.
 
-##Running the sample program
+## Running the sample program
 ###  trains &lt;file-name>
 E.g., <br />
 &nbsp;&nbsp;trains sample.dat<br />
 will run the sample data set and print out the results
 
-##API
+## API
 <dl>
 <dt><em><b>Digraph.new() </b></em>
 <dd>Initialize the Directed Graph
