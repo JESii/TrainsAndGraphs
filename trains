@@ -15,7 +15,7 @@ if ARGV[0].nil?
 end
 @dg.read_graph(ARGV[0])
 
-puts "Trains challenge for ThoughtWorks\n\n"
+puts "Trains / graph challenge\n\n"
 
 # Questions 1-5: route (path) distance
 puts print_route_distance('ABC')

@@ -176,7 +176,6 @@ class Digraph
   MAXINT = 999999999
   def dijkstra(from)
     dj_initialize(self.node_list)
-    #@dj_parent << from
     @dj_distance[from] = 0
     v = from
     while @dj_intree[v] == false do

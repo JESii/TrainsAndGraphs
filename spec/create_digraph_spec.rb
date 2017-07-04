@@ -20,7 +20,7 @@ describe "Digraph" do
     it "adds a new edge" do
       dg = Digraph.new
       dn = dg.add_vertex('A')
-      expect(dg.add_edge('A','B',5)).to be_true
+      expect(dg.add_edge('A','B',5)).to eq true
       expect(dg.vcount).to eq 2
       expect(dg.ecount).to eq 1
     end
@@ -57,7 +57,7 @@ describe "Digraph" do
     it "#node_list with 2 nodes" do
       dg = Digraph.new
       dg.add_edge('a','b',5)
-      dg.node_list.should =~ ['a','b']
+      expect(dg.node_list).to contain_exactly('a', 'b')
     end
     it "#node_list with 5 nodes" do
       dg = Digraph.new
@@ -65,7 +65,7 @@ describe "Digraph" do
       dg.add_edge('a','c',3)
       dg.add_edge('c','d',4)
       dg.add_edge('d','e',7)
-      dg.node_list.should =~ ['a','b','c','d','e']
+      expect(dg.node_list).to contain_exactly('a','b','c','d','e')
     end
     it "#[] with node name" do
       dg = Digraph.new
